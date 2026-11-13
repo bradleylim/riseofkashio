@@ -37,7 +37,7 @@ Rise of Kashio lets you play as Kashio, the aggressive, weapon-swapping fighter 
 | **Playstyles** | 3 deck archetypes: Swap Weapons, Kingpin, and Bog Monstrosity |
 | **Reach** | 7,218 unique visitors, 1,047 subscribers, and 60 favorites on the Steam Workshop (as of November 2026) |
 | **Built with** | Lua, using the game's own modding framework |
-| **Effort** | 200+ hours of development by the 2020 demo release |
+| **Effort** | 300+ hours of development by the 2020 demo release |
 
 > **Status:** Demo. The Workshop build was last updated in October 2020.
 
@@ -64,7 +64,7 @@ Kashio has two main passive abilities, **Kashio's Flail** and **Kashio's Force G
 
 ### Deck archetypes
 
-**Swap Weapons** is the most flexible archetype. Typical play is to strike with the glaive while the enemy is idle, then switch to the flail before they attack.
+**Swap Weapons** is the most flexible archetype. Typical play is to strike with the glaive while the enemy is idle, then switch to the flail before they attack.  The goal I had in mind for this playstyle was to first predict what the enemy was going to do then adapt based on their next actions which awards smart knowledgable gameplay.  Similar to the Watcher from Slay the Spire (Which this mod was actually released before the Watcher was) but with significantly less risky gameplay due to the overtuning of cards.
 
 **Kingpin** rewards committing to one weapon. After 6 consecutive actions with the same weapon (they can span turns), the card **The Execution** is added to your hand. Playing it activates Kingpin, and you gain a stack each time any combatant (you, allies, or enemies) takes an action. Swapping weapons while Kingpin is active resets your stacks. Cards tagged "Kingpin" gain bonus effects at higher stack counts.
 
@@ -76,16 +76,20 @@ Kashio has two main passive abilities, **Kashio's Flail** and **Kashio's Force G
 | 40 | Every 3rd attack deals double damage and heals for half the amount |
 | 50 | Summon a Spark Baron automech to fight for you (maximum 1) |
 
+My thinking here was after creating one way to play the character, I had to make another one so it always felts fresh to jump in and discover new combinations.  Also just the fact that if every card was built around swapping weapons, it would be boring since it would eliminate the choice aspect of a deckbuilding game where you would just pick the absolute best cards (Which still happens today in Slay the Spire 2).
+
 <details>
 <summary><strong>Bog Monstrosity (spoilers: click to expand)</strong></summary>
 
 <br>
 
-The author kept this archetype a surprise for players, so it is hidden here.
+I kept this archetype as a surprise for players as the mod was released during a Halloween community creators event, so it is hidden here.
 
-Rare "Bog Ability" cards such as Parasite Infusion, Armor of Disease, and Contamination give you a condition called **One With The Bog**. Each turn it has a chance to shuffle a free Bog card into your hand, and at the end of every turn it expends one non-Bog card from both your draw and discard piles and replaces it with a Bog card. Bog cards are very powerful, so you slowly turn into a Bog Monstrosity.
+Rare "Bog Ability" cards such as Parasite Infusion, Armor of Disease, and Contamination give you a condition called **One With The Bog**. Each turn it has a chance to shuffle a free Bog card into your hand, and at the end of every turn it expends one non-Bog card from both your draw and discard piles and replaces it with a Bog card. Bog cards are very powerful, and I wanted to simulate slowly evolving into a Bog monster while your humanoidity is stripped from you.
 
-The idea came from Bogtober, a Griftlands community event for Bog-themed content.
+Unfortunately, other than the gameplay effects and the special cards, I was not able to give Kashio a new game model but the game has left early access and has had many updates since then so there may be a chance to add that later on.
+
+The idea came from Bogtober, a Griftlands community event for Bog-themed content.  All of the Bog specific archetype cards have custom artwork made by Bee ([@OneTinyBeeDraws](https://twitter.com/OneTinyBeeDraws))
 
 <p align="center">
   <img src="docs/images/screenshot-bog-event.png" alt="A bar event where Kashio is offered the card Transform: The Bog One" width="720"><br>
@@ -96,7 +100,7 @@ The idea came from Bogtober, a Griftlands community event for Bog-themed content
 
 ## Game modes
 
-- **Battle Brawl:** a mostly complete mode for trying out all of the new cards, with custom events that let you draft some of the more powerful ones.
+- **Battle Brawl:** a mostly complete mode for trying out all of the new cards, with custom events that let you draft some of the more powerful ones.  While there is negotiation mechanics in the battle brawl which was left in for now, the focus of this mod was combat so nothing was changed with that.
 - **Rise of Kashio story campaign:** an experimental, incomplete short campaign written to learn how story quests are built. It is not representative of a final build and may crash. Battle Brawl is the intended demo experience.
 
 ## Installation
@@ -104,8 +108,8 @@ The idea came from Bogtober, a Griftlands community event for Bog-themed content
 **Steam Workshop (recommended)**
 
 1. Open the [Rise of Kashio Workshop page](https://steamcommunity.com/sharedfiles/filedetails/?id=2266976421) and click **Subscribe**.
-2. Launch Griftlands and enable the mod from the in-game mod list. <!-- VERIFY: confirm the exact menu wording for enabling workshop mods -->
-3. Start Battle Brawl to try the new character. <!-- VERIFY: confirm how players start Battle Brawl and the story mode -->
+2. Launch Griftlands and enable the mod from the in-game mod list. 
+3. Start Battle Brawl to try the new character.
 
 **From source (for modders)**
 
@@ -118,25 +122,24 @@ The idea came from Bogtober, a Griftlands community event for Bog-themed content
 ```text
 riseofkashio/
 ├── modinit.lua                  # Mod entry point loaded by the game
-├── rise_of_kashio.lua           # Main mod script
+├── rise_of_kashio.lua           # Main mod script to operate menu selections, this would include the campaign, battle brawl, what cards she starts with, etc
 ├── kashio_battle_cards.lua      # Kashio's battle card definitions
 ├── battle_grafts.lua            # Battle graft definitions
 ├── kashio_story_locations.lua   # Story campaign locations
 ├── characters/                  # Character definitions
 ├── quests/                      # Story quest scripts
 ├── textures/                    # Card art and other image assets
-├── nameCardsScript/             # Helper script
+├── nameCardsScript/             # A little script that helps me add multiple cards to Kashio's pool and keep track of what there is without launching the game
 ├── about.txt                    # Workshop description text
 ├── steam_workshop.txt           # Steam Workshop item ID
 └── preview.png                  # Workshop preview image
 ```
-<!-- VERIFY: confirm what rise_of_kashio.lua and nameCardsScript/ do, then make their descriptions specific -->
 
 ## Development and testing process
 
 I built this as a solo developer and treated each card like a small feature with its own test cycle.
 
-1. **Design:** Draft a concept for the card based on something Kashio could plausibly do, according to the game's lore. Reuse the game's existing animations and in-game effects where possible. The goal was a distinct playstyle, so I leaned into strong, unusual ideas instead of balance. Kashio is a final-boss-level character in the lore.
+1. **Design:** Draft a concept for the card based on something Kashio could plausibly do, according to the game's lore. Reuse the game's existing animations and in-game effects where possible. The goal was a distinct playstyle, so I leaned into strong, unusual ideas instead of balance. Kashio is a final-boss-level character in the one of the official character's campaign.
 2. **Implement:** Write the card, condition, or ability in Lua.
 3. **Debug-tool testing:** Run the card through 10 to 20 scenarios using the game's debug tools, looking for crashes and unintended behavior.
 4. **Integration testing:** Replay a full campaign and Battle Brawl runs to see how the card behaves in real play alongside other cards, grafts, and enemies.
@@ -151,7 +154,7 @@ Players have reported these on the [Workshop page](https://steamcommunity.com/sh
 - The end-of-campaign dialogue repeating and then crashing the game.
 - Some players start with no cards.
 
-The Workshop build has not been updated since October 2020. Please open a [GitHub issue](https://github.com/bradleylim/riseofkashio/issues) with steps to reproduce if you find more.
+The Workshop build has not been updated since October 2020. Please open a [GitHub issue](https://github.com/bradleylim/riseofkashio/issues) with steps to reproduce if you find more.  Thank you.
 
 ## Credits
 
